@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./global.css";
 import App from "./App.jsx";
-import { ClerkProvider } from "@clerk/clerk-react";
+import { ClerkProvider, RedirectToSignIn } from "@clerk/clerk-react";
 import { HeroUIProvider } from "@heroui/react";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_PUBLISHABLE_CLERK_KEY;

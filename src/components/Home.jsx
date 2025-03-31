@@ -81,21 +81,29 @@ const Home = () => {
     };
     const handleSave = async () => {
         if (transcript.trim()) {
-            const newRecord = {
-                title,
-                text: transcript,
-                userId: user.id,
-                timeStamp: new Date().toLocaleDateString(),
-            };
+            const words = transcript.trim().split(" ");
+            words.pop();
+            const cleanTranscript = words.join(" ");
+            if (cleanTranscript) {
+                const newRecord = {
+                    title,
+                    text: cleanTranscript,
+                    userId: user.id,
+                    timeStamp: new Date().toLocaleDateString(),
+                };
 
-            try {
-                const docRef = await addDoc(collection(db, "notes"), newRecord);
-                console.log("Document written with ID: ", docRef.id);
-                setTalk((prev) => [...prev, newRecord]);
-                resetTranscript();
-            } catch (err) {
-                console.log("Error occurred: ", err);
+                try {
+                    const docRef = await addDoc(
+                        collection(db, "notes"),
+                        newRecord,
+                    );
+                    console.log("Document written with ID: ", docRef.id);
+                    setTalk((prev) => [...prev, newRecord]);
+                } catch (err) {
+                    console.log("Error occurred: ", err);
+                }
             }
+            resetTranscript();
         }
     };
 

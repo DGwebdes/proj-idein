@@ -2,7 +2,7 @@ import React from "react";
 
 const RecordList = ({ records, onDelete, onDownload }) => {
     return (
-        <div className="h-full flex-1 flex flex-col rounded-lg border p-6 bg-white shadow-lg text-gray-900">
+        <div className="h-full flex-1 flex flex-col rounded-lg border p-6 bg-white shadow-lg text-gray-900 overflow-auto">
             <h2 className="mb-6 text-center text-3xl font-semibold text-blue-600">
                 Record List
             </h2>
