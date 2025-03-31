@@ -100,6 +100,10 @@ const Home = () => {
     };
 
     const handleDelete = async (noteId) => {
+        const confirmDelete = window.confirm(
+            "Your about to delete a note! Confirm?",
+        );
+        if (!confirmDelete) return;
         try {
             await deleteDoc(doc(db, "notes", noteId));
             setTalk((prev) => prev.filter((note) => note.id !== noteId));
@@ -108,33 +112,60 @@ const Home = () => {
             console.log("Error deleting note", error);
         }
     };
+    const sanitizeFilename = (title) => {
+        return title.replace(/[<>:"/\\|?*]+/g, "_"); // Replace unsafe characters with underscores
+    };
+
+    const handleDownload = (note) => {
+        const title = note.title || "Untitled";
+        const fileName = `${sanitizeFilename(title)}.txt`;
+        const content = note.text;
+
+        const blob = new Blob([content], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+    };
 
     return (
-        <div className="w-full md:flex gap-2 p-2 justify-around items-center h-screen overflow-auto">
-            <div className="border-2 flex-1 h-full flex flex-col justify-center items-center">
+        <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+            <div className="flex-1 flex flex-col items-center p-6 shadow-lg bg-white text-gray-900 rounded-2xl border border-gray-300">
                 <input
                     type="text"
                     placeholder="Note Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className={`border p-2 rounder mb-2 rounded-xl`}
+                    className="w-full mb-4 p-3 text-lg border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 />
-                <div className="rounded-4xl border p-4 text-5xl hover:bg-amber-300 hover:cursor-pointer">
-                    <button onClick={handleRecord}>
-                        {listening ? "Stop Recording" : "Start"}
-                    </button>
-                </div>
-                <div className="">
+                <button
+                    onClick={handleRecord}
+                    className="w-40 h-16 text-2xl font-semibold rounded-full transition-all duration-300 shadow-md 
+                               bg-blue-500 hover:bg-blue-700 text-white"
+                >
+                    {listening ? "Stop" : "Start"}
+                </button>
+                <div className="mt-4">
                     {listening ? (
-                        <h2>Recording...</h2>
+                        <h1 className="text-2xl font-bold text-red-500 animate-pulse">
+                            Recording...
+                        </h1>
                     ) : (
-                        <h2>Start Recording</h2>
+                        <h1 className="text-3xl font-bold">Ready to Record</h1>
                     )}
                 </div>
-                {/* This will be a modal! */}
-                <p>{transcript}</p>
+                <div className="mt-4 p-4 w-full bg-gray-100 rounded-lg min-h-[100px] border border-gray-300">
+                    <p className="text-lg text-gray-700 whitespace-pre-wrap">
+                        {transcript || "Your recorded text will appear here..."}
+                    </p>
+                </div>
             </div>
-            <RecordList records={talk} onDelete={handleDelete} />
+
+            <RecordList
+                records={talk}
+                onDelete={handleDelete}
+                onDownload={handleDownload}
+            />
         </div>
     );
 };
