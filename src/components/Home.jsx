@@ -4,8 +4,8 @@ import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
 import RecordList from "./RecordList";
-import { db } from "../../firebaseConfig";
 import {
+    db,
     collection,
     addDoc,
     getDocs,
@@ -13,7 +13,7 @@ import {
     where,
     doc,
     deleteDoc,
-} from "firebase/firestore";
+} from "../../config/firebaseConfig";
 
 const Home = () => {
     const { user } = useUser();
