@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@heroui/react";
 
 const Landing = () => {
     return (
@@ -11,17 +10,13 @@ const Landing = () => {
                     to="/sign-up"
                     className="px-6 py-2 bg-blue-500 text-white rounded"
                 >
-                    <Button color="primary" variant="solid">
-                        Create Account
-                    </Button>
+                    Create Account
                 </Link>
                 <Link
                     to="/sign-in"
                     className="px-6 py-2 bg-gray-500 text-white rounded"
                 >
-                    <Button color="primary" variant="solid">
-                        Login
-                    </Button>
+                    Login
                 </Link>
             </div>
         </div>
