@@ -2,31 +2,31 @@ import React from "react";
 
 const RecordList = ({ records, onDelete, onDownload }) => {
     return (
-        <div className="h-full flex-1 flex flex-col rounded-lg border p-6 bg-white shadow-lg text-gray-900 overflow-auto">
-            <h2 className="mb-6 text-center text-3xl font-bold text-blue-600">
+        <div className="h-full flex-1 flex flex-col rounded-lg border p-8 bg-[#FCFCFD] shadow-lg text-[#212C4B] overflow-auto">
+            <h2 className="mb-6 text-center text-4xl font-bold text-[#72C9A1]">
                 My Notes
             </h2>
-            <ul className="list-none flex flex-col gap-4">
+            <ul className="list-none flex flex-col gap-6">
                 {records.map((entry, i) => (
                     <li
                         key={i}
-                        className="border border-gray-300 rounded-lg bg-gray-50 shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out"
+                        className="border border-[#B8AB95] rounded-lg bg-[#F5F5F5] shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out"
                     >
-                        <div className="flex flex-col gap-2 p-4">
-                            <strong className="text-xl font-bold text-blue-700">
+                        <div className="flex flex-col gap-2 p-6">
+                            <strong className="text-2xl font-bold text-[#212C4B]">
                                 {entry.title}
                             </strong>
-                            <p className="text-gray-700">{entry.text}</p>
+                            <p className="text-[#212C4B]">{entry.text}</p>
                         </div>
-                        <div className="flex justify-end p-4 gap-2">
+                        <div className="flex justify-end p-6 gap-4">
                             <button
-                                className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+                                className="bg-[#72C9A1] text-white p-3 rounded-md hover:bg-[#B8AB95] transition-colors duration-200 hover:text-primary"
                                 onClick={() => onDownload(entry)} // Trigger download
                             >
                                 Download
                             </button>
                             <button
-                                className="bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-700 transition-all duration-200"
+                                className="bg-red-500 text-white py-2 px-6 rounded-full hover:bg-red-700 transition-all duration-200"
                                 onClick={() => onDelete(entry.id)}
                             >
                                 Delete

@@ -151,38 +151,39 @@ const Home = () => {
     };
 
     return (
-        <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-blue-600 to-purple-700 text-white">
-            <div className="flex-1 flex flex-col items-center p-6 shadow-lg bg-white text-gray-900 rounded-2xl border border-gray-300">
+        <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
+            <div className="flex-1 flex flex-col items-center p-8 shadow-lg bg-[#FCFCFD] text-gray-900 rounded-3xl border border-gray-300">
                 <input
                     type="text"
                     placeholder="Note Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full mb-4 p-3 text-lg border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
+                    className="w-full mb-4 p-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#72C9A1] transition-all"
                 />
                 <button
                     onClick={handleRecord}
-                    className="w-40 h-16 text-2xl font-semibold rounded-full transition-all duration-300 shadow-md 
-                               bg-blue-500 hover:bg-blue-700 text-white"
+                    className="w-40 h-16 text-2xl font-semibold rounded-full transition-all duration-300 shadow-lg 
+                           bg-[#72C9A1] hover:bg-[#B8AB95] text-white focus:ring-2 focus:ring-[#B8AB95]"
                 >
                     {listening ? "Stop" : "Start"}
                 </button>
-                <div className="mt-4">
+                <div className="mt-6">
                     {listening ? (
                         <h1 className="text-2xl font-bold text-red-500 animate-pulse">
                             Recording...
                         </h1>
                     ) : (
-                        <h1 className="text-3xl font-bold">Ready to Record</h1>
+                        <h1 className="text-3xl font-bold text-[#212C4B]">
+                            Ready to Record
+                        </h1>
                     )}
                 </div>
-                <div className="mt-4 p-4 w-full bg-gray-100 rounded-lg min-h-[100px] border border-gray-300">
-                    <p className="text-lg text-gray-700 whitespace-pre-wrap">
+                <div className="mt-6 p-6 w-full bg-[#F5F5F5] rounded-lg min-h-[100px] border border-gray-300">
+                    <p className="text-lg text-[#212C4B] whitespace-pre-wrap">
                         {transcript || "Your recorded text will appear here..."}
                     </p>
                 </div>
             </div>
-
             <RecordList
                 records={talk}
                 onDelete={handleDelete}
