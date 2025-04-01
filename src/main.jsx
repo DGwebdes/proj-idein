@@ -4,7 +4,7 @@ import "./global.css";
 import App from "./App.jsx";
 import { ClerkProvider, RedirectToSignIn } from "@clerk/clerk-react";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_PUBLISHABLE_CLERK_KEY;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const API_URL = import.meta.env.VITE_CLERK_API_URL;
 
 if (!PUBLISHABLE_KEY) {
