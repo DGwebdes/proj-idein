@@ -4,8 +4,8 @@ import "./global.css";
 import App from "./App.jsx";
 import { ClerkProvider, RedirectToSignIn } from "@clerk/clerk-react";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_PUBLISHABLE_CLERK_KEY;
-const API_URL = import.meta.env.VITE_CLERK_API_URL;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_LIVE_KEY;
+const API_URL = import.meta.env.VITE_LIVE_API_URL;
 
 if (!PUBLISHABLE_KEY) {
     throw new Error("Missing Clerk key");
