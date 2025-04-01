@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -18,15 +18,16 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const { isSignedIn } = useUser();
+    const { userId } = useAuth();
     const navigate = useNavigate();
+    console.log(userId);
 
     useEffect(() => {
-        if (!isSignedIn) {
+        if (!isSignedIn || !userId) {
             navigate("/", { replace: true });
         }
-    }, [isSignedIn, navigate]);
+    }, [isSignedIn, navigate, userId]);
 
-    const { user } = useUser();
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
     const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -55,11 +56,11 @@ const Home = () => {
 
     useEffect(() => {
         const fetchNotes = async () => {
-            if (!user?.id) return;
+            if (!userId) return;
 
             const q = query(
                 collection(db, "notes"),
-                where("userId", "==", user.id),
+                where("userId", "==", userId),
             );
             const snapshot = await getDocs(q);
 
@@ -71,7 +72,7 @@ const Home = () => {
         };
 
         fetchNotes();
-    }, [user?.id]);
+    }, [userId]);
 
     if (!SpeechRecognition || !SpeechRecognition.startListening) {
         return <h1>Your browser does not support speech recognition.</h1>;
@@ -98,7 +99,7 @@ const Home = () => {
                 const newRecord = {
                     title: title || "Untitled",
                     text: cleanTranscript,
-                    userId: user.id,
+                    userId: userId,
                     timeStamp: new Date().toLocaleDateString(),
                 };
 
