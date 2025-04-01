@@ -1,11 +1,12 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/ui/Navbar";
+import Footer from "./components/ui/Footer";
 import Home from "./components/Home";
-import { SignedIn, SignedOut, SignUp } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
-import SignInPage from "./components/SignInPage";
-import SignUpPage from "./components/SignUpPage";
+import SignInPage from "./components/ui/SignInPage";
+import SignUpPage from "./components/ui/SignUpPage";
+// import About from "./test/About";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                         </SignedIn>
                     }
                 />
+                {/* <Route path="/about" element={<About />} /> */}
                 <Route path="/sign-up" element={<SignUpPage />} />
                 <Route path="/sign-in" element={<SignInPage />} />
             </Routes>

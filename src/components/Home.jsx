@@ -14,8 +14,18 @@ import {
     doc,
     deleteDoc,
 } from "../../config/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const { isSignedIn } = useUser();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isSignedIn) {
+            navigate("/", { replace: true });
+        }
+    }, [isSignedIn, navigate]);
+
     const { user } = useUser();
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
@@ -86,7 +96,7 @@ const Home = () => {
             const cleanTranscript = words.join(" ");
             if (cleanTranscript) {
                 const newRecord = {
-                    title,
+                    title: title || "Untitled",
                     text: cleanTranscript,
                     userId: user.id,
                     timeStamp: new Date().toLocaleDateString(),
@@ -123,10 +133,14 @@ const Home = () => {
     const sanitizeFilename = (title) => {
         return title.replace(/[<>:"/\\|?*]+/g, "_"); // Replace unsafe characters with underscores
     };
+    const generateUniqueFileName = (title) => {
+        const timestamp = new Date().toLocaleDateString().replace(/[-:.]/g, "");
+        return `${sanitizeFilename(title)}_${timestamp}.txt`;
+    };
 
     const handleDownload = (note) => {
         const title = note.title || "Untitled";
-        const fileName = `${sanitizeFilename(title)}.txt`;
+        const fileName = generateUniqueFileName(title);
         const content = note.text;
 
         const blob = new Blob([content], { type: "text/plain" });

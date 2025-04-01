@@ -1,16 +1,7 @@
-import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    const { isSignedIn } = useUser();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (isSignedIn) {
-            navigate("/home");
-        }
-    }, [isSignedIn, navigate]);
     return (
         <div className="w-full py-4 px-8 flex justify-between items-center bg-gradient-to-r from-blue-600 to-purple-700 shadow-lg">
             <Link
