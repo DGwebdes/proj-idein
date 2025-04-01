@@ -13,14 +13,7 @@ function App() {
         <Router>
             <Navbar />
             <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <SignedOut>
-                            <Landing />
-                        </SignedOut>
-                    }
-                />
+                <Route path="/" element={<Landing />} />
                 <Route
                     path="/home"
                     element={
