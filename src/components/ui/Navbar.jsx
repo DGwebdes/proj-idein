@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { FaHome, FaBars, FaTimes } from "react-icons/fa";
 
@@ -40,13 +40,16 @@ const Navbar = () => {
                 } md:flex gap-6 items-center absolute top-16 right-0 bg-[var(--color-primary)] w-full p-4 md:w-auto md:p-0 md:static`}
             >
                 {isSignedIn ? (
-                    <button
-                        onClick={goToHome}
-                        className="bg-[var(--color-accent)] text-[var(--color-primary)] px-6 py-2 rounded-lg hover:bg-[var(--color-mint-500)] transition duration-300"
-                    >
-                        <FaHome className="inline-block mr-2" />
-                        Home
-                    </button>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={goToHome}
+                            className="bg-[var(--color-accent)] text-[var(--color-primary)] px-6 py-2 rounded-lg hover:bg-[var(--color-mint-500)] transition duration-300"
+                        >
+                            <FaHome className="inline-block mr-2" />
+                            Home
+                        </button>
+                        <UserButton />
+                    </div>
                 ) : (
                     <div className="flex gap-6">
                         <Link
