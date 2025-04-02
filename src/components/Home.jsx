@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useClerk } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -19,12 +19,30 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
     const { isSignedIn, user } = useUser();
     const navigate = useNavigate();
+    const { getToken } = useClerk();
 
     useEffect(() => {
         if (!isSignedIn) {
             navigate("/", { replace: true });
+            return;
         }
-    }, [isSignedIn, navigate]);
+
+        const initializeFirebaseAuth = async () => {
+            try {
+                if (isSignedIn && user) {
+                    await getToken({
+                        template: "firebase",
+                    });
+
+                    console.log("Firebase authentication initialized");
+                }
+            } catch (error) {
+                console.log("Error initializing firebase: ", error);
+            }
+        };
+
+        initializeFirebaseAuth();
+    }, [isSignedIn, user, getToken, navigate]);
 
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
