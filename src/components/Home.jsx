@@ -45,7 +45,6 @@ const Home = () => {
                     token || "",
                 );
                 setFirebaseReady(true);
-                console.log("User: ", userCredentials.user);
             } catch (error) {
                 console.error("Firebase authentication error: ", error);
                 throw error;
@@ -134,7 +133,7 @@ const Home = () => {
                         collection(db, "notes"),
                         newRecord,
                     );
-                    console.log("Document written with ID: ", docRef.id);
+
                     setTalk((prev) => [...prev, newRecord]);
                 } catch (err) {
                     console.log("Error occurred: ", err);
@@ -180,7 +179,7 @@ const Home = () => {
     if (!firebaseReady) {
         return (
             <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
-                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-[var(--color-mint-500)]">
+                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-accent]">
                     Loading your Notes
                 </h1>
             </div>
