@@ -1,4 +1,4 @@
-import { useUser, useClerk } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -15,34 +15,44 @@ import {
     deleteDoc,
 } from "../../config/firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { signInWithCustomToken } from "firebase/auth";
+import { auth } from "../../config/firebaseConfig.js";
 
 const Home = () => {
-    const { isSignedIn, user } = useUser();
+    const { userId, getToken } = useAuth();
+    const { isSignedIn } = useUser();
     const navigate = useNavigate();
-    const { getToken } = useClerk();
+    const [firebaseReady, setFirebaseReady] = useState(false);
 
     useEffect(() => {
         if (!isSignedIn) {
-            navigate("/", { replace: true });
+            navigate("/");
             return;
         }
 
-        const initializeFirebaseAuth = async () => {
-            try {
-                if (isSignedIn && user) {
-                    await getToken({
-                        template: "firebase",
-                    });
+        const signIntoFirebaseWithClerk = async () => {
+            if (!userId) {
+                console.error("No user ID available");
+                return;
+            }
 
-                    console.log("Firebase authentication initialized");
-                }
+            try {
+                const token = await getToken({
+                    template: "integration_firebase",
+                });
+                const userCredentials = await signInWithCustomToken(
+                    auth,
+                    token || "",
+                );
+                setFirebaseReady(true);
+                console.log("User: ", userCredentials.user);
             } catch (error) {
-                console.log("Error initializing firebase: ", error);
+                console.error("Firebase authentication error: ", error);
+                throw error;
             }
         };
-
-        initializeFirebaseAuth();
-    }, [isSignedIn, user, getToken, navigate]);
+        signIntoFirebaseWithClerk();
+    }, [isSignedIn, navigate, getToken, userId]);
 
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
@@ -72,11 +82,11 @@ const Home = () => {
 
     useEffect(() => {
         const fetchNotes = async () => {
-            if (!user.id) return;
+            if (!userId) return;
 
             const q = query(
                 collection(db, "notes"),
-                where("userId", "==", user.id),
+                where("userId", "==", userId),
             );
             const snapshot = await getDocs(q);
 
@@ -88,7 +98,7 @@ const Home = () => {
         };
 
         fetchNotes();
-    }, [user.id]);
+    }, [userId]);
 
     if (!SpeechRecognition || !SpeechRecognition.startListening) {
         return <h1>Your browser does not support speech recognition.</h1>;
@@ -115,7 +125,7 @@ const Home = () => {
                 const newRecord = {
                     title: title || "Untitled",
                     text: cleanTranscript,
-                    userId: user.id,
+                    userId: userId,
                     timeStamp: new Date().toLocaleDateString(),
                 };
 
@@ -166,6 +176,16 @@ const Home = () => {
         link.download = fileName;
         link.click();
     };
+
+    if (!firebaseReady) {
+        return (
+            <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
+                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-[var(--color-mint-500)]">
+                    Loading your Notes
+                </h1>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
