@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
 import SignInPage from "./components/ui/SignInPage";
 import SignUpPage from "./components/ui/SignUpPage";
+import ErrorBoundary from "./utils/ErrorBoundary";
+import InfoPage from "./components/InfoPage";
 // import About from "./test/About";
 
 function App() {
@@ -17,9 +19,16 @@ function App() {
                 <Route
                     path="/home"
                     element={
-                        <SignedIn>
-                            <Home />
-                        </SignedIn>
+                        <>
+                            <SignedIn>
+                                <ErrorBoundary>
+                                    <Home />
+                                </ErrorBoundary>
+                            </SignedIn>
+                            <SignedOut>
+                                <InfoPage />
+                            </SignedOut>
+                        </>
                     }
                 />
                 {/* <Route path="/about" element={<About />} /> */}

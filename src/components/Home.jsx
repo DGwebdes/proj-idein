@@ -1,4 +1,4 @@
-import { useAuth, useUser } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -20,16 +20,10 @@ import { auth } from "../../config/firebaseConfig.js";
 
 const Home = () => {
     const { userId, getToken } = useAuth();
-    const { isSignedIn } = useUser();
     const navigate = useNavigate();
     const [firebaseReady, setFirebaseReady] = useState(false);
 
     useEffect(() => {
-        if (!isSignedIn) {
-            navigate("/");
-            return;
-        }
-
         const signIntoFirebaseWithClerk = async () => {
             if (!userId) {
                 console.error("No user ID available");
@@ -51,7 +45,7 @@ const Home = () => {
             }
         };
         signIntoFirebaseWithClerk();
-    }, [isSignedIn, navigate, getToken, userId]);
+    }, [navigate, getToken, userId]);
 
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
@@ -178,8 +172,8 @@ const Home = () => {
 
     if (!firebaseReady) {
         return (
-            <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
-                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-accent]">
+            <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)]">
+                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-primary]">
                     Loading your Notes
                 </h1>
             </div>

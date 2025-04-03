@@ -15,7 +15,7 @@ const Navbar = () => {
 
     return (
         <div className="w-full py-4 px-8 bg-[var(--color-primary)] text-[var(--color-secondary)] flex justify-between items-center shadow-md relative">
-            <div className="text-2xl font-bold text-[var(--color-mint-500)]">
+            <div className="text-2xl md:text-5xl font-bold text-[var(--color-mint-500)] font-logo">
                 <Link to="/" className="hover:text-[var(--color-accent)]">
                     Idein
                 </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
             <div
                 className={`${
                     isMenuOpen ? "block" : "hidden"
-                } md:flex gap-6 items-center absolute top-16 right-0 bg-[var(--color-primary)] w-full p-4 md:w-auto md:p-0 md:static`}
+                } md:flex gap-6 items-center absolute top-16 right-0 bg-[var(--color-primary)] w-full p-4 md:w-auto md:p-0 md:static z-20`}
             >
                 {isSignedIn ? (
                     <div className="flex gap-2">
