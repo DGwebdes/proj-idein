@@ -15,7 +15,7 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
-        <ClerkProvider publishableKey={DEV_KEY} frontendAPI={DEV_URL}>
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY} frontendAPI={API_URL}>
             <App />
         </ClerkProvider>
     </StrictMode>,
