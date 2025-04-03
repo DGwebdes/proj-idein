@@ -13,7 +13,7 @@ const InfoPage = () => {
                 {/* Header Section */}
                 <div className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#72C9A1] to-[var(--color-primary)] bg-clip-text text-transparent">
-                        Welcome to VoiceNotes
+                        Welcome to Idein
                     </h1>
                     <p className="text-lg md:text-xl text-gray-600 max-w-2xl">
                         Your personal voice-to-text note-taking assistant
@@ -58,7 +58,7 @@ const InfoPage = () => {
 
                 {/* Footer Note */}
                 <p className="text-sm text-gray-500 mt-4">
-                    New to VoiceNotes?{" "}
+                    New to Idein?{" "}
                     <a
                         href="/sign-up"
                         className="text-[#72C9A1] hover:underline font-medium"
