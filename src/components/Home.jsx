@@ -17,6 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { signInWithCustomToken } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig.js";
+import InfoGuide from "./ui/InfoGuide.jsx";
 
 const Home = () => {
     const { userId, getToken } = useAuth();
@@ -34,10 +35,7 @@ const Home = () => {
                 const token = await getToken({
                     template: "integration_firebase",
                 });
-                const userCredentials = await signInWithCustomToken(
-                    auth,
-                    token || "",
-                );
+                await signInWithCustomToken(auth, token || "");
                 setFirebaseReady(true);
             } catch (error) {
                 console.error("Firebase authentication error: ", error);
@@ -49,7 +47,12 @@ const Home = () => {
 
     const [title, setTitle] = useState("");
     const [talk, setTalk] = useState([]);
-    const { transcript, listening, resetTranscript } = useSpeechRecognition();
+    const {
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition,
+    } = useSpeechRecognition();
     const commands = [
         {
             command: "clear",
@@ -93,8 +96,16 @@ const Home = () => {
         fetchNotes();
     }, [userId]);
 
-    if (!SpeechRecognition || !SpeechRecognition.startListening) {
-        return <h1>Your browser does not support speech recognition.</h1>;
+    if (
+        !SpeechRecognition ||
+        !SpeechRecognition.startListening ||
+        !browserSupportsSpeechRecognition
+    ) {
+        return (
+            <h1 className="text-5xl font-extrabold leading-tight mb-4 text-primary">
+                Your browser does not support speech recognition.
+            </h1>
+        );
     }
 
     const handleRecord = () => {
@@ -123,10 +134,7 @@ const Home = () => {
                 };
 
                 try {
-                    const docRef = await addDoc(
-                        collection(db, "notes"),
-                        newRecord,
-                    );
+                    await addDoc(collection(db, "notes"), newRecord);
 
                     setTalk((prev) => [...prev, newRecord]);
                 } catch (err) {
@@ -173,7 +181,7 @@ const Home = () => {
     if (!firebaseReady) {
         return (
             <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)]">
-                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-primary]">
+                <h1 className="text-5xl font-extrabold leading-tight mb-4 text-primary">
                     Loading your Notes
                 </h1>
             </div>
@@ -182,6 +190,7 @@ const Home = () => {
 
     return (
         <div className="w-full h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white">
+            <InfoGuide />
             <div className="flex-1 flex flex-col items-center p-8 shadow-lg bg-[#FCFCFD] text-gray-900 rounded-3xl border border-gray-300">
                 <input
                     type="text"

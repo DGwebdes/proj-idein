@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "motion/react";
+import InfoGuide from "./ui/InfoGuide.jsx";
 
 const InfoPage = () => {
     return (
         <div className="w-full min-h-screen flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white overflow-auto">
+            <InfoGuide />
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

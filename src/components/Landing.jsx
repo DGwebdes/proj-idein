@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
+import BannerCompatible from "./ui/BannerCompatible.jsx";
+import InfoGuide from "./ui/InfoGuide.jsx";
+import PremiumFeatureTeaser from "./ui/Premium.jsx";
 
 const Landing = () => {
     const { isSignedIn } = useUser();
@@ -14,6 +17,8 @@ const Landing = () => {
 
     return (
         <div className="w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-[var(--color-primary)]">
+            <BannerCompatible />
+            <InfoGuide />
             {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[var(--color-mint-500)] opacity-10 blur-3xl"></div>
@@ -87,8 +92,8 @@ const Landing = () => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             className="text-2xl mb-8 text-[var(--color-secondary)] max-w-2xl mx-auto"
                         >
-                            Capture your voice notes effortlessly. Transform
-                            your ideas into organized text with just a click.
+                            Capture your notes effortlessly. Transform your
+                            ideas into organized text with just a click.
                         </motion.p>
 
                         {/* Feature highlights */}
@@ -139,6 +144,8 @@ const Landing = () => {
             </motion.div>
 
             {/* Footer */}
+            {/* Premium Feature */}
+            <PremiumFeatureTeaser />
             <div className="absolute bottom-4 text-[var(--color-secondary)]/60 text-sm">
                 © {new Date().getFullYear()} Idein. All rights reserved.
             </div>
