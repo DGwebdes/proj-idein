@@ -16,7 +16,7 @@ const Landing = () => {
     };
 
     return (
-        <div className="w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-[var(--color-primary)]">
+        <div className="w-full h-full flex flex-col justify-center items-center relative overflow-hidden bg-[var(--color-primary)]">
             <BannerCompatible />
             <InfoGuide />
             {/* Background Elements */}
