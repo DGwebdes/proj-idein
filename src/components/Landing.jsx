@@ -17,14 +17,6 @@ const Landing = () => {
 
     return (
         <div className="w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-[var(--color-primary)]">
-            <button
-                onClick={() => {
-                    throw new Error("This is your first error!");
-                }}
-            >
-                Break the world
-            </button>
-            ;
             <BannerCompatible />
             <InfoGuide />
             {/* Background Elements */}

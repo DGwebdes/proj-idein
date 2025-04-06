@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { X, AlertTriangle, Info } from "lucide-react";
-console.log("Im here babe! ");
 
 const BannerCompatible = () => {
     const [isVisible, setIsVisible] = useState(true);
