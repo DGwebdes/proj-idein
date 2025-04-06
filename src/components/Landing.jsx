@@ -131,11 +131,12 @@ const Landing = () => {
                             >
                                 Create Account
                             </Link>
+
                             <Link
-                                to="/sign-in"
-                                className="w-full md:w-auto px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] text-xl font-bold rounded-full shadow-lg border border-[var(--color-secondary)]/20 hover:bg-[var(--color-secondary)]/10 transform transition duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-[var(--color-secondary)]/30"
+                                to="/try"
+                                className="w-full md:w-auto px-10 py-4 bg-transparent text-[var(--color-secondary)] text-xl font-bold rounded-full border-2 border-dashed border-[var(--color-secondary)]/40 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transform transition duration-300 hover:-translate-y-1"
                             >
-                                Sign In
+                                Try Without Account
                             </Link>
                         </motion.div>
                     </>
