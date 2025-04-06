@@ -25,3 +25,6 @@ server/
 *.njsproj
 *.sln
 *.sw?
+
+# Sentry Config File
+.env.sentry-build-plugin

@@ -17,6 +17,14 @@ const Landing = () => {
 
     return (
         <div className="w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-[var(--color-primary)]">
+            <button
+                onClick={() => {
+                    throw new Error("This is your first error!");
+                }}
+            >
+                Break the world
+            </button>
+            ;
             <BannerCompatible />
             <InfoGuide />
             {/* Background Elements */}
@@ -25,7 +33,6 @@ const Landing = () => {
                 <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[var(--color-accent)] opacity-10 blur-3xl"></div>
                 <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[var(--color-mint-500)] opacity-5 blur-2xl"></div>
             </div>
-
             {/* Content Container */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -142,7 +149,6 @@ const Landing = () => {
                     </>
                 )}
             </motion.div>
-
             {/* Footer */}
             {/* Premium Feature */}
             <PremiumFeatureTeaser />

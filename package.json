@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.25.5",
+    "@sentry/react": "^9.11.0",
+    "@sentry/vite-plugin": "^3.3.1",
     "@tailwindcss/vite": "^4.0.17",
     "firebase": "^11.5.0",
     "lucide-react": "^0.487.0",
