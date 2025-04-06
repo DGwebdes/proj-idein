@@ -8,6 +8,7 @@ import SignInPage from "./components/ui/SignInPage";
 import SignUpPage from "./components/ui/SignUpPage";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import InfoPage from "./components/InfoPage";
+import FreeTrial from "./components/FreeTrial";
 // import About from "./test/About";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         </>
                     }
                 />
+                <Route path="/try" element={<FreeTrial />} />
                 {/* <Route path="/about" element={<About />} /> */}
                 <Route path="/sign-up" element={<SignUpPage />} />
                 <Route path="/sign-in" element={<SignInPage />} />

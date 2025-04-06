@@ -54,13 +54,13 @@ const Navbar = () => {
                     <div className="flex gap-6">
                         <Link
                             to="/sign-in"
-                            className="px-6 py-2 bg-[var(--color-mint-500)] text-[var(--color-primary)] rounded-lg hover:bg-[var(--color-accent)] transition duration-300"
+                            className="flex items-center gap-2 px-6 py-3 md:py-2 bg-[var(--color-primary)] text-[var(--color-secondary)] font-semibold rounded-full border border-[var(--color-secondary)]/20 hover:bg-[var(--color-secondary)]/10 transform transition duration-300 hover:-translate-y-1"
                         >
                             Login
                         </Link>
                         <Link
                             to="/sign-up"
-                            className="px-6 py-2 bg-[var(--color-accent)] text-[var(--color-primary)] rounded-lg hover:bg-[var(--color-mint-500)] transition duration-300"
+                            className="flex items-center gap-2 px-6 py-3 md:py-2 bg-gradient-to-r from-[var(--color-mint-500)] to-[var(--color-accent)] text-[var(--color-primary)] font-semibold rounded-full hover:shadow-lg transform transition duration-300 hover:-translate-y-1"
                         >
                             Create Account
                         </Link>
