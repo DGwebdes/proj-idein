@@ -53,6 +53,8 @@ const Home = () => {
         resetTranscript,
         browserSupportsSpeechRecognition,
     } = useSpeechRecognition();
+    const [language, setLanguage] = useState("");
+
     const commands = [
         {
             command: "clear",
@@ -107,10 +109,16 @@ const Home = () => {
             </h1>
         );
     }
+    const handleLanguage = (e) => {
+        setLanguage(e.target.value);
+    };
 
     const handleRecord = () => {
         if (!listening) {
-            SpeechRecognition.startListening({ continuous: true });
+            SpeechRecognition.startListening({
+                continuous: true,
+                language: language,
+            });
         } else {
             handleStop();
         }
@@ -221,6 +229,21 @@ const Home = () => {
                     <p className="text-lg text-[#212C4B] whitespace-pre-wrap">
                         {transcript || "Your recorded text will appear here..."}
                     </p>
+                </div>
+                <div className="mt-2 flex gap-4 place-self-center">
+                    <label className="text-sm text-gray-500">
+                        Choose a language
+                    </label>
+                    <select
+                        name="language"
+                        id="language"
+                        onChange={handleLanguage}
+                        className=""
+                    >
+                        <option value="pt-PT">PT</option>
+                        <option value="en-US">EN</option>
+                        <option value="en-GB">GB</option>
+                    </select>
                 </div>
             </div>
             <RecordList

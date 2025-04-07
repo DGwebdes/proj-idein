@@ -5,7 +5,6 @@ import App from "./App.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import * as Sentry from "@sentry/react";
 import { PostHogProvider } from "posthog-js/react";
-import posthog from "posthog-js";
 
 Sentry.init({
     dsn: "https://464deb8a518be599981d4a83a630deec@o4509095957626880.ingest.de.sentry.io/4509095962083408",

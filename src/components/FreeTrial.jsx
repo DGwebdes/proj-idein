@@ -13,9 +13,11 @@ const TrialMode = () => {
     const [talk, setTalk] = useState([]);
     const [storageInfo, setStorageInfo] = useState({});
     const { transcript, listening, resetTranscript } = useSpeechRecognition();
+    const [language, setLanguage] = useState("");
 
     // Load notes from localStorage on component mount
     useEffect(() => {
+        console.log("loaded");
         const notes = localStorageService.getNotes();
         setTalk(notes);
         updateStorageInfo();
@@ -53,10 +55,16 @@ const TrialMode = () => {
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
         return <h1>Your browser does not support speech recognition.</h1>;
     }
+    const handleLanguage = (e) => {
+        setLanguage(e.target.value);
+    };
 
     const handleRecord = () => {
         if (!listening) {
-            SpeechRecognition.startListening({ continuous: true });
+            SpeechRecognition.startListening({
+                continuous: true,
+                language: language,
+            });
         } else {
             handleStop();
         }
@@ -122,7 +130,7 @@ const TrialMode = () => {
     };
 
     return (
-        <div className="w-full min-h-screen flex flex-col gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white overflow-auto">
+        <div className="w-full h-full flex flex-col gap-6 p-6 bg-gradient-to-br from-[#72C9A1] to-[var(--color-primary)] text-white overflow-auto">
             {/* Trial Mode Banner */}
             <div className="bg-amber-50 text-amber-800 p-4 rounded-xl shadow-md border border-amber-200 mb-2">
                 <div className="flex items-start gap-3">
@@ -176,7 +184,7 @@ const TrialMode = () => {
 
             {/* Main Content - Similar to your Home component */}
             <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-1 flex flex-col items-center p-8 shadow-lg bg-[#FCFCFD] text-gray-900 rounded-3xl border border-gray-300">
+                <div className="flex-1 flex flex-col items-center p-8 shadow-lg bg-[#FCFCFD] text-gray-900 rounded-3xl border border-gray-300 md:h-fit">
                     <input
                         type="text"
                         placeholder="Note Title"
@@ -207,6 +215,21 @@ const TrialMode = () => {
                             {transcript ||
                                 "Your recorded text will appear here..."}
                         </p>
+                    </div>
+                    <div className="mt-2 flex gap-4 place-self-center">
+                        <label className="text-sm text-gray-500">
+                            Choose a language
+                        </label>
+                        <select
+                            name="language"
+                            id="language"
+                            onChange={handleLanguage}
+                            className=""
+                        >
+                            <option value="pt-PT">PT</option>
+                            <option value="en-US">EN</option>
+                            <option value="en-GB">GB</option>
+                        </select>
                     </div>
                 </div>
 
