@@ -53,7 +53,7 @@ const Home = () => {
         resetTranscript,
         browserSupportsSpeechRecognition,
     } = useSpeechRecognition();
-    const [language, setLanguage] = useState("");
+    const [language, setLanguage] = useState("en-US");
 
     const commands = [
         {
@@ -240,9 +240,11 @@ const Home = () => {
                         onChange={handleLanguage}
                         className=""
                     >
-                        <option value="pt-PT">PT</option>
                         <option value="en-US">EN</option>
+                        <option value="pt-PT">PT</option>
                         <option value="en-GB">GB</option>
+                        <option value="es-ES">ES</option>
+                        <option value="pt-br">BR</option>
                     </select>
                 </div>
             </div>

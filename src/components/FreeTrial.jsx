@@ -13,7 +13,7 @@ const TrialMode = () => {
     const [talk, setTalk] = useState([]);
     const [storageInfo, setStorageInfo] = useState({});
     const { transcript, listening, resetTranscript } = useSpeechRecognition();
-    const [language, setLanguage] = useState("");
+    const [language, setLanguage] = useState("en-US");
 
     // Load notes from localStorage on component mount
     useEffect(() => {
@@ -226,9 +226,11 @@ const TrialMode = () => {
                             onChange={handleLanguage}
                             className=""
                         >
-                            <option value="pt-PT">PT</option>
                             <option value="en-US">EN</option>
+                            <option value="pt-PT">PT</option>
                             <option value="en-GB">GB</option>
+                            <option value="es-ES">ES</option>
+                            <option value="pt-br">BR</option>
                         </select>
                     </div>
                 </div>
