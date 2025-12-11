@@ -1,30 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/logo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            href="https://fonts.cdnfonts.com/css/young-techs"
-            rel="stylesheet"
-        />
-        <title>Idein "</title>
-        <style>
-            body {
-                box-sizing: border-box;
-                margin: 0 auto;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Idein 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .spotlight {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(40px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
             }
-            #root {
-                width: 100%;
-                height: 100dvh;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+            .spotlight {
+                width: 400px;
+                height: 400px;
             }
-        </style>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.jsx"></script>
-    </body>
+        }
+    </style>
+</head>
+<body>
+    <div class="spotlight"></div>
+    <div class="content">
+        <h1>New Design/Concept<br>Coming Soon</h1>
+    </div>
+</body>
 </html>
